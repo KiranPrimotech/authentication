@@ -7,6 +7,9 @@ import 'package:authentication/feature/apple_login.dart';
 import 'package:authentication/feature/facebook_login.dart';
 import 'package:authentication/feature/google_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+
+import 'feature/sign_phone_number.dart';
 
 class AuthManager extends AuthAbstract{
 
@@ -27,7 +30,17 @@ class AuthManager extends AuthAbstract{
   }
 
   @override
-  Future<User?> phoneLogin() async{
-   log("Not Implemented" , name: "Auth Logs");
+  Future<void> phoneLogin({required BuildContext context,required String countryCode,
+    required String mobile,
+    String? verificationId,
+    int? resendToken,
+    String? routes}) async{
+
+    PhoneAuthenticationService(context: context).registerUser(context: context, countryCode: countryCode, mobile: mobile,routes: routes);
+  }
+
+  @override
+  Future<void> verifyOtp({required BuildContext context,required String verificationId,required String otp}) async {
+     PhoneAuthenticationService(context: context).verifyOtp(context:context,verificationId: verificationId, otp: otp);
   }
 }

@@ -17,6 +17,8 @@ dependencies:
   flutter_facebook_auth: ^5.0.7
   sign_in_with_apple: ^4.3.0
   crypto: ^3.0.2
+  get: ^4.6.5
+  flutter_overlay_loader: ^2.0.0
 
 
 
