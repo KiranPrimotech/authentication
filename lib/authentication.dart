@@ -1,6 +1,5 @@
 library authentication;
 
-import 'dart:developer';
 
 import 'package:authentication/feature/AuthAbstrsact.dart';
 import 'package:authentication/feature/apple_login.dart';

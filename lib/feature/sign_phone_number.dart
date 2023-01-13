@@ -20,6 +20,8 @@ class PhoneAuthenticationService {
         String? routes}) async {
 
     Loader.show(context);
+  debugPrint("mobile $mobile");
+  debugPrint("countycode $countryCode");
     await auth.verifyPhoneNumber(
       phoneNumber: "${countryCode} ${mobile}",
       verificationCompleted: (PhoneAuthCredential credential) {
