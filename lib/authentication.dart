@@ -16,7 +16,7 @@ class AuthManager extends AuthAbstract{
 
   @override
   Future<User?> googleLogin({required String androidClientId,required String iosClientId }) async{
-  return await LoginManager().signInWithGoogle(androidClientId: androidClientId, iosClientId: iosClientId);
+  return await GoogleLogin(androidClientId: androidClientId, iosClientId: iosClientId).execute();
   }
 
   @override
@@ -26,7 +26,7 @@ class AuthManager extends AuthAbstract{
 
   @override
   Future<User?> appleLogin() async{
-    return await AppleLoginService().signInWithApple();
+    return await AppleLoginService().execute();
   }
 
   @override

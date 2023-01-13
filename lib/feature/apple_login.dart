@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'dart:math';
+import 'package:authentication/feature/LoginMethod.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 
-class AppleLoginService {
+class AppleLoginService extends LoginMethod{
   /// Generates a cryptographically secure random nonce, to be included in a
   /// credential request.
   String generateNonce([int length = 32]) {
@@ -26,7 +27,12 @@ class AppleLoginService {
 
   final _firebaseAuth = FirebaseAuth.instance;
 
-  Future<User?> signInWithApple() async {
+  // Future<User?> signInWithApple() async {
+  //
+  // }
+
+  @override
+  Future<User?> execute() async{
     try {
       // To prevent replay attacks with the credential returned from Apple, we
       // include a nonce in the credential request. When signing in with
@@ -43,12 +49,12 @@ class AppleLoginService {
 
           redirectUri:
 
-              kIsWeb
-                  ? Uri.parse(
-                      'https://flutter-sign-in-with-apple-example.glitch.me/callbacks/sign_in_with_apple')
-                  : Uri.parse(
-                      'https://dogexpress-30ff0.firebaseapp.com/__/auth/handler',
-                    ),
+          kIsWeb
+              ? Uri.parse(
+              'https://flutter-sign-in-with-apple-example.glitch.me/callbacks/sign_in_with_apple')
+              : Uri.parse(
+            'https://dogexpress-30ff0.firebaseapp.com/__/auth/handler',
+          ),
         ),
         scopes: [
           AppleIDAuthorizationScopes.email,
