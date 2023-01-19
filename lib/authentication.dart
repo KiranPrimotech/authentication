@@ -1,13 +1,12 @@
 library authentication;
 
-
 import 'package:authentication/feature/AuthAbstrsact.dart';
 import 'package:authentication/feature/apple_login.dart';
+import 'package:authentication/feature/email_login.dart';
 import 'package:authentication/feature/facebook_login.dart';
 import 'package:authentication/feature/google_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'feature/sign_phone_number.dart';
 
 class AuthManager extends AuthAbstract{
@@ -41,5 +40,10 @@ class AuthManager extends AuthAbstract{
   @override
   Future<void> verifyOtp({required BuildContext context,required String verificationId,required String otp}) async {
      PhoneAuthenticationService(context: context).verifyOtp(context:context,verificationId: verificationId, otp: otp);
+  }
+
+  @override
+  Future<User?> emailLogin({required String email, required String password}) async  {
+    return await EmailLogin().loginViaEmail(email: email, password: password);
   }
 }
