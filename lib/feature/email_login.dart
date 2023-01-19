@@ -1,9 +1,7 @@
-import 'package:authentication/error.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class EmailLogin extends ErrorAuth{
-
+class EmailLogin {
 
   /// Create a New user
   Future<User?> createUserViaEmail({required String email,required String password}) async{
@@ -77,9 +75,4 @@ class EmailLogin extends ErrorAuth{
     return user;
   }
 
-  @override
-  authError(FirebaseAuthException e) {
-    debugPrint("Firebase Auth Exception  $e");
-
-  }
 }
