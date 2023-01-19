@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class EmailLogin {
 
   /// Create a New user
-  Future<User?> createUserViaEmail({required String email,required String password}) async{
+  Future<User?> createUserViaEmail({required String email,required String password, required Function(FirebaseAuthException e) onError}) async{
     User? user ;
     debugPrint("create via email");
     try {
@@ -23,6 +23,8 @@ class EmailLogin {
         debugPrint("User Email --- ${credential.user}");
       }
     } on FirebaseAuthException catch (e) {
+
+      onError(e);
       if (e.code == 'user-not-found') {
         debugPrint('No user found for that email.');
       } else if (e.code == 'wrong-password') {

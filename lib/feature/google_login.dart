@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginManager {
@@ -7,6 +8,7 @@ class LoginManager {
   late final GoogleSignInAccount? googleUser;
 
   Future<User?> signInWithGoogle({required String androidClientId,required String iosClientId }) async {
+    User? user;
     try {
       if (Platform.isAndroid) {
         googleUser = await GoogleSignIn(
@@ -32,13 +34,13 @@ class LoginManager {
 
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
-      User? user = userCredential.user;
+      user = userCredential.user;
 
-      print("User Email --- ${user!.email}");
+      debugPrint("User Email --- ${user!.email}");
       return user;
     } catch (e) {
-      // Get.snackbar("Google Login ", "Exception --- ${e}",
-      //     backgroundColor: AppColors.black, colorText: AppColors.white);
+      debugPrint("$e");
     }
+    return user;
   }
 }
