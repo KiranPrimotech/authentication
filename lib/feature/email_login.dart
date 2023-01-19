@@ -7,7 +7,7 @@ class EmailLogin{
   /// Create a New user
   Future<User?> createUserViaEmail({required String email,required String password}) async{
     User? user ;
-    debugPrint("login via email");
+    debugPrint("create via email");
     try {
 
       final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -23,7 +23,7 @@ class EmailLogin{
       else{
         debugPrint("User Email --- ${credential.user}");
       }
-      return user;
+
 
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
