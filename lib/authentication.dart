@@ -43,7 +43,7 @@ class AuthManager extends AuthAbstract{
   }
 
   @override
-  Future<User?> emailLogin({required String email, required String password}) async  {
-    return await EmailLogin().loginViaEmail(email: email, password: password);
+  Future<User?> emailLogin({required String email, required String password,required Function(FirebaseAuthException e) onError}) async  {
+    return await EmailLogin().loginViaEmail(email: email, password: password, onError:  onError);
   }
 }

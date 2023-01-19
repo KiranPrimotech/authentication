@@ -6,7 +6,7 @@ abstract class AuthAbstract{
   Future<User?> googleLogin({required String androidClientId,required String iosClientId });
   Future<User?> appleLogin();
   Future<User?> facebookLogin();
-  Future<User?> emailLogin({required String email,required String password});
+  Future<User?> emailLogin({required String email,required String password,required Function(FirebaseAuthException e) onError});
 
   Future<void> phoneLogin({required BuildContext context,required String countryCode,
     required String mobile,

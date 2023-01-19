@@ -1,7 +1,8 @@
+import 'package:authentication/error.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class EmailLogin{
+class EmailLogin extends ErrorAuth{
 
 
   /// Create a New user
@@ -40,7 +41,7 @@ class EmailLogin{
 
 
   /// Login User If Already Present in the database
-  Future<User?> loginViaEmail({required String email,required String password}) async{
+  Future<User?> loginViaEmail({required String email,required String password , required Function(FirebaseAuthException e) onError}) async{
     User? user ;
     debugPrint("login via email");
     try {
@@ -60,20 +61,25 @@ class EmailLogin{
       }
 
     } on FirebaseAuthException catch (e) {
-
-
-
-      if (e.code == 'user-not-found') {
-         user = await createUserViaEmail(email: email,password: password);
-        debugPrint('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        debugPrint('Wrong password provided for that user.');
-      }
+      onError(e);
+      // Error().authError(e);
+      // if (e.code == 'user-not-found') {
+      //    user = await createUserViaEmail(email: email,password: password);
+      //   debugPrint('No user found for that email.');
+      // } else if (e.code == 'wrong-password') {
+      //   debugPrint('Wrong password provided for that user.');
+      // }
     }
     catch(e){
       debugPrint('Exception Login  $e');
 
     }
     return user;
+  }
+
+  @override
+  authError(FirebaseAuthException e) {
+    debugPrint("Firebase Auth Exception  $e");
+
   }
 }
