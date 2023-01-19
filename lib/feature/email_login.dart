@@ -23,8 +23,6 @@ class EmailLogin{
       else{
         debugPrint("User Email --- ${credential.user}");
       }
-
-
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         debugPrint('No user found for that email.');
@@ -66,7 +64,7 @@ class EmailLogin{
 
 
       if (e.code == 'user-not-found') {
-        createUserViaEmail(email: email,password: password);
+         user = await createUserViaEmail(email: email,password: password);
         debugPrint('No user found for that email.');
       } else if (e.code == 'wrong-password') {
         debugPrint('Wrong password provided for that user.');
