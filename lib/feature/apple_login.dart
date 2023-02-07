@@ -67,6 +67,9 @@ class AppleLoginService {
           await FirebaseAuth.instance.signInWithCredential(oauthCredential);
       User? user = userCredential.user;
       return user;
-    } catch (e) {}
+    } catch (e) {
+      debugPrint("Apple Login exception  $e ");
+
+    }
   }
 }
