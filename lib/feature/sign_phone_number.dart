@@ -17,7 +17,8 @@ class PhoneAuthenticationService {
         required String mobile,
         String? verificationId,
         int? resendToken,
-        String? routes}) async {
+        String? routes}
+      ) async {
 
     Loader.show(context);
   debugPrint("mobile $mobile");
@@ -49,12 +50,10 @@ class PhoneAuthenticationService {
         if(routes!=null) {
           Navigator.of(context).pushNamed(
               routes, arguments: verificationId);
-
-
-        }else{
+        }
+        else{
 
         }
-
       },
       timeout: const Duration(seconds: 25),
       forceResendingToken: resendToken,
@@ -74,7 +73,6 @@ class PhoneAuthenticationService {
     );
     debugPrint("Credential ----- ${credential.smsCode}");
     await auth.signInWithCredential(credential);
-
   }
 
 }

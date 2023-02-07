@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class FacebookManager {
@@ -20,6 +21,8 @@ class FacebookManager {
       print("User Email --- ${user!.email}");
       // Once signed in, return the UserCredential
       return user;
-    } catch (e) {}
+    } catch (e) {
+      debugPrint("facebook Exception    $e");
+    }
   }
 }
